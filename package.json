@@ -21,10 +21,6 @@
     "prettier": "^3.0.0"
   },
   "lint-staged": {
-    "{backend,frontend}/**/*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
     "**/*.{ts,tsx,js,jsx}": [
       "prettier --write"
     ],
