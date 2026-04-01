@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Home",
+    "predictions": "My Predictions",
+    "ranking": "Ranking",
+    "logout": "Log out"
+  },
+  "auth": {
+    "login": "Sign in",
+    "register": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "loginTitle": "Welcome back",
+    "registerTitle": "Create your account"
+  },
+  "editions": {
+    "title": "Oscar Editions",
+    "current": "Current edition",
+    "categories": "Categories",
+    "films": "Nominated films"
+  },
+  "predictions": {
+    "title": "My Predictions",
+    "save": "Save prediction",
+    "saved": "Prediction saved",
+    "remove": "Remove prediction",
+    "empty": "You haven't made any predictions yet"
+  },
+  "score": {
+    "title": "Ranking",
+    "correct": "Correct",
+    "total": "Total predictions",
+    "accuracy": "Accuracy"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "tryAgain": "Try again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  }
+}

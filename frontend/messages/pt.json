@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Início",
+    "predictions": "Meus Palpites",
+    "ranking": "Ranking",
+    "logout": "Sair"
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome",
+    "loginTitle": "Bem-vindo de volta",
+    "registerTitle": "Crie sua conta"
+  },
+  "editions": {
+    "title": "Edições do Oscar",
+    "current": "Edição atual",
+    "categories": "Categorias",
+    "films": "Filmes indicados"
+  },
+  "predictions": {
+    "title": "Meus Palpites",
+    "save": "Salvar palpite",
+    "saved": "Palpite salvo",
+    "remove": "Remover palpite",
+    "empty": "Você ainda não fez nenhum palpite"
+  },
+  "score": {
+    "title": "Ranking",
+    "correct": "Acertos",
+    "total": "Total de palpites",
+    "accuracy": "Precisão"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Algo deu errado",
+    "tryAgain": "Tentar novamente",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
+  }
+}
