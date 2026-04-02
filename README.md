@@ -153,6 +153,56 @@ Full Swagger UI is available at `/api/docs` when the backend is running.
 | DELETE | `/predictions/:id`        | ✓    | Delete prediction          |
 | GET    | `/score?editionId=`       | ✓    | Ranking for an edition     |
 
+## Deploy (Railway)
+
+Each service is deployed as a separate Railway service pointing to its subdirectory.
+
+### 1. Create a project
+
+Go to [railway.app](https://railway.app) → New Project → Deploy from GitHub repo → select `oscar-arena`.
+
+### 2. Add services
+
+Create three services in the same project:
+
+| Service    | Root directory | Notes                                   |
+| ---------- | -------------- | --------------------------------------- |
+| `db`       | —              | Add from Railway templates → PostgreSQL |
+| `backend`  | `backend/`     | Uses `backend/Dockerfile`               |
+| `frontend` | `frontend/`    | Uses `frontend/Dockerfile`              |
+
+### 3. Configure backend environment variables
+
+In the **backend** service → Variables:
+
+```
+DATABASE_URL        = (link the PostgreSQL service — Railway auto-fills this)
+JWT_SECRET          = your-strong-secret
+FRONTEND_URL        = https://<your-frontend>.railway.app
+TMDB_API_KEY        = (optional)
+OMDB_API_KEY        = (optional)
+```
+
+### 4. Configure frontend environment variables
+
+In the **frontend** service → Variables → Build Variables:
+
+```
+NEXT_PUBLIC_API_URL = https://<your-backend>.railway.app
+```
+
+> `NEXT_PUBLIC_*` vars are inlined at build time — set them as **Build** variables, not runtime variables.
+
+### 5. Deploy
+
+Railway builds each service from its `railway.toml`. The backend automatically runs `prisma migrate deploy` on startup.
+
+To seed initial data after first deploy:
+
+```bash
+railway run --service backend npx prisma db seed
+```
+
 ## CI
 
 GitHub Actions runs on every push and pull request to `master`:
