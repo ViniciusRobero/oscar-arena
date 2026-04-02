@@ -12,7 +12,11 @@
     "password": "Password",
     "name": "Name",
     "loginTitle": "Welcome back",
-    "registerTitle": "Create your account"
+    "registerTitle": "Create your account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "loginError": "Invalid email or password",
+    "registerError": "Failed to create account. Please try again."
   },
   "editions": {
     "title": "Oscar Editions",

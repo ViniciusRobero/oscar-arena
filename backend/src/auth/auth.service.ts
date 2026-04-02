@@ -29,6 +29,10 @@ export class AuthService {
     return { accessToken }
   }
 
+  async getMe(id: string) {
+    return this.usersService.findById(id)
+  }
+
   async login(dto: LoginDto) {
     const user = await this.usersService.findByEmail(dto.email)
     if (!user) {

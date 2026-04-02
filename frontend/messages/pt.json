@@ -12,7 +12,11 @@
     "password": "Senha",
     "name": "Nome",
     "loginTitle": "Bem-vindo de volta",
-    "registerTitle": "Crie sua conta"
+    "registerTitle": "Crie sua conta",
+    "noAccount": "Não tem uma conta?",
+    "haveAccount": "Já tem uma conta?",
+    "loginError": "E-mail ou senha inválidos",
+    "registerError": "Erro ao criar conta. Tente novamente."
   },
   "editions": {
     "title": "Edições do Oscar",

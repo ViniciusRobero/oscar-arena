@@ -2,6 +2,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { ThemeProvider } from 'next-themes'
 import { notFound } from 'next/navigation'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 const locales = ['pt', 'en']
 
@@ -23,7 +24,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </ThemeProvider>
     </NextIntlClientProvider>
   )
