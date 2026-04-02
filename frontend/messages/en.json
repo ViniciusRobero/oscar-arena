@@ -18,24 +18,41 @@
     "loginError": "Invalid email or password",
     "registerError": "Failed to create account. Please try again."
   },
+  "dashboard": {
+    "currentEdition": "Current Edition",
+    "myPredictions": "My Predictions",
+    "makePredictions": "Make predictions",
+    "viewRanking": "View ranking",
+    "noCurrentEdition": "No active edition at the moment"
+  },
   "editions": {
     "title": "Oscar Editions",
     "current": "Current edition",
     "categories": "Categories",
-    "films": "Nominated films"
+    "films": "Nominated films",
+    "empty": "No editions found",
+    "viewDetails": "View categories",
+    "myPick": "My pick",
+    "selectPick": "Select"
   },
   "predictions": {
     "title": "My Predictions",
     "save": "Save prediction",
     "saved": "Prediction saved",
-    "remove": "Remove prediction",
-    "empty": "You haven't made any predictions yet"
+    "remove": "Remove",
+    "empty": "You haven't made any predictions yet",
+    "film": "Film",
+    "category": "Category",
+    "correct": "Correct!"
   },
   "score": {
     "title": "Ranking",
+    "rank": "Rank",
+    "player": "Player",
     "correct": "Correct",
-    "total": "Total predictions",
-    "accuracy": "Accuracy"
+    "total": "Predictions",
+    "accuracy": "Accuracy",
+    "empty": "No predictions recorded yet"
   },
   "common": {
     "loading": "Loading...",
