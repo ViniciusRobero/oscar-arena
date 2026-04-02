@@ -62,11 +62,11 @@ export default function RankingPage() {
       ) : (
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="grid grid-cols-[2rem_1fr_4rem_4rem_4rem] gap-2 text-xs font-medium uppercase text-muted-foreground">
+            <CardTitle className="grid grid-cols-[1.5rem_1fr_3.5rem_3.5rem] gap-2 text-xs font-medium uppercase text-muted-foreground sm:grid-cols-[2rem_1fr_4rem_4rem_4rem]">
               <span>{t('score.rank')}</span>
               <span>{t('score.player')}</span>
               <span className="text-right">{t('score.correct')}</span>
-              <span className="text-right">{t('score.total')}</span>
+              <span className="hidden text-right sm:block">{t('score.total')}</span>
               <span className="text-right">{t('score.accuracy')}</span>
             </CardTitle>
           </CardHeader>
@@ -74,12 +74,12 @@ export default function RankingPage() {
             {ranking.map((entry) => (
               <div
                 key={entry.userId}
-                className="grid grid-cols-[2rem_1fr_4rem_4rem_4rem] items-center gap-2 px-6 py-3"
+                className="grid grid-cols-[1.5rem_1fr_3.5rem_3.5rem] items-center gap-2 px-4 py-3 sm:grid-cols-[2rem_1fr_4rem_4rem_4rem] sm:px-6"
               >
                 <span className="text-sm font-semibold text-muted-foreground">{entry.rank}</span>
                 <span className="truncate text-sm font-medium">{entry.name}</span>
                 <span className="text-right text-sm">{entry.correctPredictions}</span>
-                <span className="text-right text-sm text-muted-foreground">
+                <span className="hidden text-right text-sm text-muted-foreground sm:block">
                   {entry.totalPredictions}
                 </span>
                 <span className="text-right text-sm font-medium">{entry.accuracy}%</span>

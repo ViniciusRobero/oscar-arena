@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useAuth } from '@/contexts/AuthContext'
 import { LocaleSwitcher } from './LocaleSwitcher'
+import { ThemeToggle } from './ThemeToggle'
 import { Button } from './ui/button'
 
 export function Navbar() {
@@ -25,37 +26,40 @@ export function Navbar() {
     router.push(`/${locale}/login`)
   }
 
+  const linkClass = (href: string) =>
+    `rounded-md px-3 py-1.5 text-sm transition-colors ${
+      pathname.startsWith(href)
+        ? 'bg-accent text-accent-foreground font-medium'
+        : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+    }`
+
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-5xl items-center gap-6 px-4">
+      {/* Main row */}
+      <div className="mx-auto flex h-14 max-w-5xl items-center gap-4 px-4">
         <Link
           href={`/${locale}/dashboard`}
-          className="text-base font-semibold tracking-tight hover:opacity-80"
+          className="shrink-0 text-base font-semibold tracking-tight hover:opacity-80"
         >
           Oscar Arena
         </Link>
 
-        <nav className="flex flex-1 items-center gap-1">
+        {/* Desktop nav links */}
+        <nav className="hidden flex-1 items-center gap-1 sm:flex">
           {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
-                pathname.startsWith(href)
-                  ? 'bg-accent text-accent-foreground font-medium'
-                  : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-              }`}
-            >
+            <Link key={href} href={href} className={linkClass(href)}>
               {label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* Controls */}
+        <div className="ml-auto flex items-center gap-1 sm:ml-0">
+          <ThemeToggle />
           <LocaleSwitcher />
           {user && (
             <>
-              <span className="hidden text-sm text-muted-foreground sm:inline">{user.name}</span>
+              <span className="hidden text-sm text-muted-foreground lg:inline">{user.name}</span>
               <Button variant="ghost" size="sm" onClick={handleLogout}>
                 {t('logout')}
               </Button>
@@ -63,6 +67,23 @@ export function Navbar() {
           )}
         </div>
       </div>
+
+      {/* Mobile nav row */}
+      <nav className="flex border-t sm:hidden">
+        {navLinks.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`flex-1 py-2 text-center text-xs font-medium transition-colors ${
+              pathname.startsWith(href)
+                ? 'bg-accent text-accent-foreground'
+                : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+            }`}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
     </header>
   )
 }
