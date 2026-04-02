@@ -1,6 +1,34 @@
+import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
+import { fetchPosterUrl } from '../src/poster/fetch-poster'
 
 const prisma = new PrismaClient()
+
+const FILMS: { title: string; year: number }[] = [
+  { title: 'Anora', year: 2024 },
+  { title: 'The Brutalist', year: 2024 },
+  { title: 'A Complete Unknown', year: 2024 },
+  { title: 'Conclave', year: 2024 },
+  { title: 'Dune: Part Two', year: 2024 },
+  { title: 'Emilia Pérez', year: 2024 },
+  { title: "I'm Still Here", year: 2024 },
+  { title: 'Nickel Boys', year: 2024 },
+  { title: 'The Substance', year: 2024 },
+  { title: 'Wicked', year: 2024 },
+  { title: 'Sing Sing', year: 2024 },
+  { title: 'The Apprentice', year: 2024 },
+  { title: 'A Real Pain', year: 2024 },
+  { title: 'Flow', year: 2024 },
+  { title: 'Inside Out 2', year: 2024 },
+  { title: 'Memoir of a Snail', year: 2024 },
+  { title: 'Wallace & Gromit: Vengeance Most Fowl', year: 2024 },
+  { title: 'The Wild Robot', year: 2024 },
+  { title: 'The Girl with the Needle', year: 2024 },
+  { title: 'September Says', year: 2024 },
+  { title: 'The Seed of the Sacred Fig', year: 2024 },
+  { title: 'The Six Triple Eight', year: 2024 },
+  { title: 'Elton John: Never Too Late', year: 2024 },
+]
 
 async function main() {
   console.log('Seeding database with 97th Academy Awards data (2025)...')
@@ -46,6 +74,18 @@ async function main() {
     prisma.category.create({ data: { name: 'Best Original Song' } }),
   ])
 
+  // ── Poster URLs ──────────────────────────────────────────────────────────────
+  console.log('Fetching poster URLs (TMDB → OMDB → Wikipedia)...')
+  const posterMap = new Map(
+    await Promise.all(
+      FILMS.map(async (f) => [f.title, await fetchPosterUrl(f.title, f.year)] as const),
+    ),
+  )
+
+  const poster = (title: string) => posterMap.get(title) ?? null
+  const fetched = Array.from(posterMap.values()).filter(Boolean).length
+  console.log(`  ${fetched}/${FILMS.length} posters found`)
+
   // ── Films ────────────────────────────────────────────────────────────────────
   const [
     anora,
@@ -72,31 +112,89 @@ async function main() {
     sixTripleEight,
     eltonJohnDoc,
   ] = await Promise.all([
-    prisma.film.create({ data: { title: 'Anora', year: 2024 } }),
-    prisma.film.create({ data: { title: 'The Brutalist', year: 2024 } }),
-    prisma.film.create({ data: { title: 'A Complete Unknown', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Conclave', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Dune: Part Two', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Emilia Pérez', year: 2024 } }),
-    prisma.film.create({ data: { title: "I'm Still Here", year: 2024 } }),
-    prisma.film.create({ data: { title: 'Nickel Boys', year: 2024 } }),
-    prisma.film.create({ data: { title: 'The Substance', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Wicked', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Sing Sing', year: 2024 } }),
-    prisma.film.create({ data: { title: 'The Apprentice', year: 2024 } }),
-    prisma.film.create({ data: { title: 'A Real Pain', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Flow', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Inside Out 2', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Memoir of a Snail', year: 2024 } }),
+    prisma.film.create({ data: { title: 'Anora', year: 2024, posterUrl: poster('Anora') } }),
     prisma.film.create({
-      data: { title: 'Wallace & Gromit: Vengeance Most Fowl', year: 2024 },
+      data: { title: 'The Brutalist', year: 2024, posterUrl: poster('The Brutalist') },
     }),
-    prisma.film.create({ data: { title: 'The Wild Robot', year: 2024 } }),
-    prisma.film.create({ data: { title: 'The Girl with the Needle', year: 2024 } }),
-    prisma.film.create({ data: { title: 'September Says', year: 2024 } }),
-    prisma.film.create({ data: { title: 'The Seed of the Sacred Fig', year: 2024 } }),
-    prisma.film.create({ data: { title: 'The Six Triple Eight', year: 2024 } }),
-    prisma.film.create({ data: { title: 'Elton John: Never Too Late', year: 2024 } }),
+    prisma.film.create({
+      data: { title: 'A Complete Unknown', year: 2024, posterUrl: poster('A Complete Unknown') },
+    }),
+    prisma.film.create({
+      data: { title: 'Conclave', year: 2024, posterUrl: poster('Conclave') },
+    }),
+    prisma.film.create({
+      data: { title: 'Dune: Part Two', year: 2024, posterUrl: poster('Dune: Part Two') },
+    }),
+    prisma.film.create({
+      data: { title: 'Emilia Pérez', year: 2024, posterUrl: poster('Emilia Pérez') },
+    }),
+    prisma.film.create({
+      data: { title: "I'm Still Here", year: 2024, posterUrl: poster("I'm Still Here") },
+    }),
+    prisma.film.create({
+      data: { title: 'Nickel Boys', year: 2024, posterUrl: poster('Nickel Boys') },
+    }),
+    prisma.film.create({
+      data: { title: 'The Substance', year: 2024, posterUrl: poster('The Substance') },
+    }),
+    prisma.film.create({ data: { title: 'Wicked', year: 2024, posterUrl: poster('Wicked') } }),
+    prisma.film.create({
+      data: { title: 'Sing Sing', year: 2024, posterUrl: poster('Sing Sing') },
+    }),
+    prisma.film.create({
+      data: { title: 'The Apprentice', year: 2024, posterUrl: poster('The Apprentice') },
+    }),
+    prisma.film.create({
+      data: { title: 'A Real Pain', year: 2024, posterUrl: poster('A Real Pain') },
+    }),
+    prisma.film.create({ data: { title: 'Flow', year: 2024, posterUrl: poster('Flow') } }),
+    prisma.film.create({
+      data: { title: 'Inside Out 2', year: 2024, posterUrl: poster('Inside Out 2') },
+    }),
+    prisma.film.create({
+      data: { title: 'Memoir of a Snail', year: 2024, posterUrl: poster('Memoir of a Snail') },
+    }),
+    prisma.film.create({
+      data: {
+        title: 'Wallace & Gromit: Vengeance Most Fowl',
+        year: 2024,
+        posterUrl: poster('Wallace & Gromit: Vengeance Most Fowl'),
+      },
+    }),
+    prisma.film.create({
+      data: { title: 'The Wild Robot', year: 2024, posterUrl: poster('The Wild Robot') },
+    }),
+    prisma.film.create({
+      data: {
+        title: 'The Girl with the Needle',
+        year: 2024,
+        posterUrl: poster('The Girl with the Needle'),
+      },
+    }),
+    prisma.film.create({
+      data: { title: 'September Says', year: 2024, posterUrl: poster('September Says') },
+    }),
+    prisma.film.create({
+      data: {
+        title: 'The Seed of the Sacred Fig',
+        year: 2024,
+        posterUrl: poster('The Seed of the Sacred Fig'),
+      },
+    }),
+    prisma.film.create({
+      data: {
+        title: 'The Six Triple Eight',
+        year: 2024,
+        posterUrl: poster('The Six Triple Eight'),
+      },
+    }),
+    prisma.film.create({
+      data: {
+        title: 'Elton John: Never Too Late',
+        year: 2024,
+        posterUrl: poster('Elton John: Never Too Late'),
+      },
+    }),
   ])
 
   const e = edition.id

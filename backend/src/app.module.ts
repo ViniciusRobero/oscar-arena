@@ -8,6 +8,7 @@ import { CategoriesModule } from './categories/categories.module'
 import { NominationsModule } from './nominations/nominations.module'
 import { PredictionsModule } from './predictions/predictions.module'
 import { ScoreModule } from './score/score.module'
+import { PosterModule } from './poster/poster.module'
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ScoreModule } from './score/score.module'
     NominationsModule,
     PredictionsModule,
     ScoreModule,
+    PosterModule,
   ],
 })
 export class AppModule {}
